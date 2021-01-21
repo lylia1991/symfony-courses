@@ -22,7 +22,7 @@
       <td>{{ contact.nom }}</td>
       <td>{{ contact.prenom }}</td>
       <td>{{ contact.telephone }}</td>
-      <td><a href="" type="button" class="btn btn-info">Afficher</a></td>
+      <td><a href="{{ path('contact') }}" type="button" class="btn btn-info">Afficher</a></td>
     </tr>
     {% endfor %}
   </tbody>
