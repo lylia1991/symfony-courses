@@ -15,6 +15,34 @@ class HomeController extends AbstractController
       */
       public function home()
       {
-         return $this->render('base.html.twig');
+        $contacts =  [
+            [
+                'id' => 1,
+                'nom' => 'Durand',
+                'prenom' => 'Emilie',
+                'telephone' => "0123456789"
+                
+            ],
+
+            [
+                'id' => 2,
+                'nom' => 'Hugo',
+                'prenom' => 'Dupont',
+                'telephone' => "0123456789"
+                
+            ],
+
+            [
+                'id' => 3,
+                'nom' => 'Tank',
+                'prenom' => 'Thor',
+                'telephone' => "0123456789"
+                
+            ]
+        ]; 
+
+         return $this->render('home.html.twig', [
+            "contacts"=> $contacts
+         ]);
       }
   }
