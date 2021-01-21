@@ -13,5 +13,5 @@ class DefaultController extends AbstractController
     {
         return new Response("<h1>Hello $nom</h1>");
     }  
-
+    
 }
