@@ -6,6 +6,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Home;
+
+
 
 class HomeController extends AbstractController
    
@@ -63,9 +67,9 @@ class HomeController extends AbstractController
     {
         return $this->render('contact.html.twig', [
             'id' =>$id,
-           
             
         ]);
+
     }
   
 }
