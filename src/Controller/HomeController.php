@@ -46,12 +46,26 @@ class HomeController extends AbstractController
          ]);
       }
 
-     /**
-   * @Route("/contact", name="contact")
-   */
+//    /**
+//    * @Route("/contact", name="contact")
+//   */
 
-    public function contact()
-      {
-       return $this->render('contact.html.twig');
-      }
-  }
+//    public function contact()
+//     {
+//   return $this->render('contact.html.twig');
+//      }
+
+  
+  /**
+    *@Route("/contact/{id}", name="contact")
+    */
+    public function contact ($id) 
+    {
+        return $this->render('contact.html.twig', [
+            'id' =>$id,
+           
+            
+        ]);
+    }
+  
+}
