@@ -49,12 +49,12 @@ class ContactController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $contact = new Contact();
-        $contact->setNom('Dupont');
-        $contact->setPrenom('Christine');
+        $contact->setNom('Laffitte');
+        $contact->setPrenom('jean-marc');
         $contact->setTelephone('0123456789');
-        $contact->setAdresse('21 Rue de paris');
-        $contact->setVille('Lyon');
-        $contact->setAge('31');
+        $contact->setAdresse('35 rue du null');
+        $contact->setVille('Paris');
+        $contact->setAge('28');
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($contact);
@@ -72,16 +72,38 @@ class ContactController extends AbstractController
     public function update($id)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $contact = $entityManager->getRepository(Contact::class)->find($id);
+        $contacts = $entityManager->getRepository(Contact::class)->find($id);
 
-        $contact->setTelephone('New number!');
+        $contacts->setTelephone('New number!');
         $entityManager->flush();
 
         return $this->render('home.html.twig', [
-            "contact"=> $contact
+            "contacts"=> $contacts
          ]);
 
         
     }
+
+
+     /**
+     * @Route("/delete/{id}", name="delete")
+     */
+
+    public function delete($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $contacts = $entityManager->getRepository(Contact::class)->find($id);
+
+        $entityManager->remove($contacts);
+        $entityManager->flush();
+
+        return $this->render('home.html.twig', [
+            "contacts"=> $contacts
+            ]);
+
+    }
+
+
+
   
 }
