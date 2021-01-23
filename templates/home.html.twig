@@ -12,6 +12,9 @@
       <th scope="col">Nom</th>
       <th scope="col">Prénom</th>
       <th scope="col">Téléphone</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Ville</th>
+      <th scope="col">Age</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -22,10 +25,14 @@
       <td>{{ contact.nom }}</td>
       <td>{{ contact.prenom }}</td>
       <td>{{ contact.telephone }}</td>
-      <td><a href="{{ path('contact',{id: contact.id} )}}" type="button" class="btn btn-info">Afficher</a></td>
+       <td>{{ contact.adresse }}</td>
+      <td>{{ contact.ville }}</td>
+      <td>{{ contact.age }}</td>
+      <td><a href="{{ path('contact', {id : contact.id}) }}" type="button" class="btn btn-info">Afficher</a></td>
+      <td><a href="" type="button" class="btn btn-warning">Modifier</a></td>
+      <td><a href="" type="button" class="btn btn-danger">Supprimer</a></td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
-
 {% endblock %}
