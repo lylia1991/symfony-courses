@@ -20,7 +20,9 @@ class ContactController extends AbstractController
       */
       public function home()
       {
-        $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();
+        // $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();
+
+        $contacts = $this->getDoctrine()->getRepository(Contact::class)->findByGreaterThan(18);
 
          return $this->render('home.html.twig', [
             "contacts"=> $contacts
