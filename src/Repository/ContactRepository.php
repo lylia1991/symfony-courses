@@ -26,12 +26,12 @@ class ContactRepository extends ServiceEntityRepository
     public function findByGreaterThan($age)
     {
         return $this->createQueryBuilder('a')
-            ->andWhere('a.age > :val')
-            ->setParameter('val', $age)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult();
+           ->andWhere('a.age > :val')
+           ->setParameter('val', $age)
+           ->orderBy('a.id', 'ASC')
+           ->setMaxResults(10)
+           ->getQuery()
+           ->getResult();
         
     }
     

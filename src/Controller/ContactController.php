@@ -37,6 +37,7 @@ class ContactController extends AbstractController
     {
         $contact = $this->getDoctrine()->getRepository(Contact::class)->find($id);
         return $this->render('contact.html.twig', [
+            "id" => $id,
             "contact"=> $contact
         ]);
 
@@ -51,12 +52,12 @@ class ContactController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
 
         $contact = new Contact();
-        $contact->setNom('Laffitte');
-        $contact->setPrenom('jean-marc');
+        $contact->setNom('Le grand');
+        $contact->setPrenom('Nicolas');
         $contact->setTelephone('0123456789');
-        $contact->setAdresse('35 rue du null');
+        $contact->setAdresse('45 rue');
         $contact->setVille('Paris');
-        $contact->setAge('28');
+        $contact->setAge('35');
 
         // tell Doctrine you want to (eventually) save the Product (no queries yet)
         $entityManager->persist($contact);
@@ -79,10 +80,11 @@ class ContactController extends AbstractController
         $contacts->setTelephone('New number!');
         $entityManager->flush();
 
-        return $this->render('home.html.twig', [
-            "contacts"=> $contacts
-         ]);
+        // return $this->render('home.html.twig', [
+        //     "contacts"=> $contacts
+        //  ]);
 
+        return $this->redirectToRoute('home');
         
     }
 
@@ -99,13 +101,12 @@ class ContactController extends AbstractController
         $entityManager->remove($contacts);
         $entityManager->flush();
 
-        return $this->render('home.html.twig', [
-            "contacts"=> $contacts
-            ]);
+        // return $this->render('home.html.twig', [
+        //     "contacts"=> $contacts
+        //     ]);
+
+        return $this->redirectToRoute('home');
 
     }
 
-
-
-  
 }
