@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ContactRepository::class)
@@ -19,16 +20,25 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage = "Nom invalide"
+     * )
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *     min = 2,
+     *     minMessage = "Prénom invalide"
+     * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message = "Ce champ ne peut étre vide")
      */
     private $telephone;
 
@@ -44,6 +54,14 @@ class Contact
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\GreaterThanOrEqual(
+     *     value = 15,
+     *     message = " Au minimum 15 ans"
+     * )
+     *  @Assert\LessThanOrEqual(
+     *     value = 120,
+     *     message = " Au maximum 120 ans"
+     * )
      */
     private $age;
 

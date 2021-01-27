@@ -5,11 +5,14 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Contact;
+use App\Form\ContactType;
 
 use Doctrine\ORM\EntityManagerInterface;
-
-
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
 class ContactController extends AbstractController
@@ -22,7 +25,7 @@ class ContactController extends AbstractController
       {
         // $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();
 
-        $contacts = $this->getDoctrine()->getRepository(Contact::class)->findByGreaterThan(18);
+        $contacts = $this->getDoctrine()->getRepository(Contact::class)->findAll();
 
          return $this->render('home.html.twig', [
             "contacts"=> $contacts
@@ -108,5 +111,58 @@ class ContactController extends AbstractController
         return $this->redirectToRoute('home');
 
     }
+    
+    /**
+     * @Route("/add-contact", name="add-new-contact")
+     */
+
+    public function addContact(Request $request)
+    {
+        $new_contact = new Contact;
+
+        $form = $this->createForm(ContactType::class, $new_contact);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid())
+        {
+           $entityManager = $this->getDoctrine()->getManager();
+           $entityManager->persist($new_contact);
+           $entityManager->flush();
+           
+            $this->addFlash("contact_add_success", "Votre contact a été ajouté avec succès");
+            return $this->redirectToRoute('home');
+        
+        }
+   
+        return $this->render('ajouter.html.twig', [
+            "form" => $form->createView()
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/edit-contact/{id}", name="edit-contact")
+     */
+     
+    public function editContact($id, Request $request)
+    {
+      $contact = $this->getDoctrine()->getRepository(Contact::class)->find($id);
+      $form = $this->createForm(ContactType::class, $contact);
+      $form->handleRequest($request);
+  
+      if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+  
+        $this->addFlash("contact_edit_success", "Contact modifié avec succès");
+        return $this->redirectToRoute('home');
+      }
+  
+      return $this->render('modifier.html.twig', [
+        "form" => $form->createView()
+      ]);
+    }
+
 
 }
