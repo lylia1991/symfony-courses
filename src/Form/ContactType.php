@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Contact;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,6 +18,10 @@ class ContactType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('telephone')
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'title',
+            ])
             ->add('adresse')
             ->add('ville')
             ->add('age')

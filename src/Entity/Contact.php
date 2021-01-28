@@ -21,8 +21,8 @@ class Contact
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "Nom invalide"
+     *      min = 2,
+     *      minMessage = "Nom invalide"
      * )
      */
     private $nom;
@@ -30,40 +30,45 @@ class Contact
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\Length(
-     *     min = 2,
-     *     minMessage = "Prénom invalide"
+     *      min = 2,
+     *      minMessage = "Prénom invalide"
      * )
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message = "Ce champ ne peut étre vide")
+     * @Assert\NotBlank(message = "Ce champ ne peut être vide")
      */
     private $telephone;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      * @Assert\GreaterThanOrEqual(
      *     value = 15,
-     *     message = " Au minimum 15 ans"
+     *     message = "au minimum 15 ans"
      * )
-     *  @Assert\LessThanOrEqual(
+     * @Assert\LessThanOrEqual(
      *     value = 120,
-     *     message = " Au maximum 120 ans"
+     *     message = "au maximum 120 ans"
      * )
      */
     private $age;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="contacts")
+     */
+    private $category;
 
     public function getId(): ?int
     {
@@ -111,7 +116,7 @@ class Contact
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setAdresse(?string $adresse): self
     {
         $this->adresse = $adresse;
 
@@ -123,21 +128,33 @@ class Contact
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille(?string $ville): self
     {
         $this->ville = $ville;
 
         return $this;
     }
 
-    public function getAge(): ?string
+    public function getAge(): ?int
     {
         return $this->age;
     }
 
-    public function setAge(string $age): self
+    public function setAge(int $age): self
     {
         $this->age = $age;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

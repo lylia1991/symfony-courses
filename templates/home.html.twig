@@ -31,6 +31,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Prénom</th>
       <th scope="col">Téléphone</th>
+      <th scope="col">Catégorie</th>
       <th scope="col">Adresse</th>
       <th scope="col">Ville</th>
       <th scope="col">Age</th>
@@ -44,6 +45,7 @@
       <td>{{ contact.nom }}</td>
       <td>{{ contact.prenom }}</td>
       <td>{{ contact.telephone }}</td>
+      <td>{{ contact.category.title |capitalize }}</td>
        <td>{{ contact.adresse }}</td>
       <td>{{ contact.ville }}</td>
       <td>{{ contact.age }}</td>
