@@ -93,7 +93,7 @@ class ContactController extends AbstractController
 
 
      /**
-     * @Route("/delete/{id}", name="delete")
+     * @Route("/admin/delete/{id}", name="delete")
      */
 
     public function delete($id)
@@ -113,7 +113,7 @@ class ContactController extends AbstractController
     }
     
     /**
-     * @Route("/add-contact", name="add-new-contact")
+     * @Route("/admin/add-contact", name="add-new-contact")
      */
 
     public function addContact(Request $request)
@@ -142,7 +142,7 @@ class ContactController extends AbstractController
 
 
     /**
-     * @Route("/edit-contact/{id}", name="edit-contact")
+     * @Route("/admin/edit-contact/{id}", name="edit-contact")
      */
      
     public function editContact($id, Request $request)
